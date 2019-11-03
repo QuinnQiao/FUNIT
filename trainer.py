@@ -121,6 +121,9 @@ class Trainer(nn.Module):
         print('Forward function not implemented.')
         pass
 
+    def debug(self, co_data):
+        return self.model.debug(co_data)
+
 
 def get_model_list(dirname, key):
     if os.path.exists(dirname) is False:

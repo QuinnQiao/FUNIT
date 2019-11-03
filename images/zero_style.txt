@@ -1,0 +1,7 @@
+content shape:
+(512, 16, 16)
+style shape:
+(256, 8, 8)
+number of zero styles (256 in all):
+42
+

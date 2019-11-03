@@ -24,9 +24,9 @@ class FUNITModel(nn.Module):
 
     def forward(self, co_data, cl_data, hp, mode):
         xa = co_data[0].cuda()
-        la = co_data[1].cuda()
+        la = co_data[1].cuda() # label
         xb = cl_data[0].cuda()
-        lb = cl_data[1].cuda()
+        lb = cl_data[1].cuda() # label
         if mode == 'gen_update':
             c_xa = self.gen.enc_content(xa)
             s_xa = self.gen.enc_class_model(xa)
@@ -125,3 +125,10 @@ class FUNITModel(nn.Module):
         c_xa_current = self.gen_test.enc_content(xa)
         xt_current = self.gen_test.decode(c_xa_current, s_xb_current)
         return xt_current
+
+    def debug(self, one_image):
+        self.eval()
+        x = one_image.cuda()
+        c_x, s_x = self.gen_test.debug(x)
+        return c_x, s_x
+        

@@ -171,6 +171,11 @@ class FewShotGen(nn.Module):
         images = self.dec(content)
         return images
 
+    def debug(self, one_image):
+        content = self.enc_content(one_image)
+        class_code = self.enc_class_model.debug(one_image)
+        return content, class_code
+
 
 class ClassModelEncoder(nn.Module):
     def __init__(self, downs, ind_im, dim, latent_dim, norm, activ, pad_type):
@@ -198,6 +203,10 @@ class ClassModelEncoder(nn.Module):
 
     def forward(self, x):
         return self.model(x)
+
+    def debug(self, x):
+        model = self.model[:-2]
+        return model(x)
 
 
 class ContentEncoder(nn.Module):
